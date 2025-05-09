@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 
-public class Cuenta implements CBUGenerador, TransferenciaEntreCuentas{
+public class Cuenta implements CBUGenerador, TransferenciaEntreCuentas {
 
 	protected static HashSet<String> cbuGenerados = new HashSet<String>();
 	protected static HashMap<Integer, Operaciones> registroOperaciones;
@@ -23,24 +23,31 @@ public class Cuenta implements CBUGenerador, TransferenciaEntreCuentas{
 
 	public void agregarDinero(Double cantidadIngresada) {
 		this.saldo += cantidadIngresada;
-		registrarOperacion(Motivo.DEPOSITO , consultarCBU(), consultarCBU(), cantidadIngresada);
+		registrarOperacion(Motivo.DEPOSITO, consultarCBU(), consultarCBU(), cantidadIngresada);
 	}
 
 	public Double consultarSaldo() {
 		return this.saldo;
 	}
-	
+
 	public void retirarDinero(Double candidadExtraida) throws SaldoInsuficienteException, UsoDescubiertoException {
 		this.saldo -= candidadExtraida;
 	}
 
 	public String generarCBU() {
+		// Importo random para optimizar el espacio de memoria, ya que de importar toda
+		// la clase math estariamos importando muchas funaciones que no estamos
+		// utilizando
 		Random random = new Random();
 		StringBuilder cbuBuilder = new StringBuilder();
-		// clase en Java que se utiliza para construir y manipular cadenas de caracteres
-		// de manera eficiente. Proporciona métodos para agregar, insertar y modificar
-		// el contenido de la cadena sin necesidad de crear objetos adicionales, lo que
-		// resulta en un mejor rendimiento y consumo de memoria
+		// StringBuilder es una clase en Java que se utiliza para construir y manipular
+		// cadenas de caracteres de manera eficiente. Proporciona métodos para agregar,
+		// insertar y modificar el contenido de la cadena sin necesidad de crear objetos
+		// adicionales, lo que resulta en un mejor rendimiento y consumo de memoria. en
+		// esta caso la utilizamos porque un CBU tiene 22 caracteres numericos,
+		// demasiado largo para un long y si usaramos un String no tendriamos una
+		// concatenacion numerica, de esta forma nos aseguramos la corracta generacion de
+		// un CBU
 
 		for (int i = 0; i < Cuenta.CBU_LENGTH; i++) {
 			int digit = random.nextInt(10); // Generar dígito aleatorio entre 0 y 9
@@ -53,20 +60,24 @@ public class Cuenta implements CBUGenerador, TransferenciaEntreCuentas{
 	public String consultarCBU() {
 		return CBU;
 	}
-	
+
 	protected void registrarOperacion(Motivo motivo, String CBUOrigen, String CBUDestino, Double Monto) {
 		Operaciones nueva = new Operaciones(motivo, CBUOrigen, CBUDestino, Monto);
 		registroOperaciones.put(this.contadorDeOperaciones, nueva);
 		contadorDeOperaciones++;
 	}
-	
+
 	protected Integer cantidadDeRegistrosDeOperaciones() {
+		//Para ordenar los registras de operaciones se crea un contador que luego sera
+		//insertado en el HashMap y asi ordenar los registros
 		return this.contadorDeOperaciones;
 	}
-	protected  Set<Entry<Integer, Operaciones>> RegistrosDeOperaciones() {
+
+	protected Set<Entry<Integer, Operaciones>> RegistrosDeOperaciones() {
+		//Este metodo almacena y muestra todas las operaciones generadas
 		return registroOperaciones.entrySet();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(CBU);
@@ -86,23 +97,24 @@ public class Cuenta implements CBUGenerador, TransferenciaEntreCuentas{
 
 	@Override
 	public void enviarDinero(String CBUqueEnvia, String CBUqueRecibe, Double monto) throws CuentaInexistenteException {
-		if(CBUqueEnvia.equals(CBU) && cbuGenerados.contains(CBUqueRecibe)) {
+		if (CBUqueEnvia.equals(CBU) && cbuGenerados.contains(CBUqueRecibe)) {
 			try {
 				retirarDinero(monto);
-				registrarOperacion(Motivo.TRANSFERENCIA , CBUqueEnvia, CBUqueRecibe, monto);
+				registrarOperacion(Motivo.TRANSFERENCIA, CBUqueEnvia, CBUqueRecibe, monto);
 			} catch (SaldoInsuficienteException | UsoDescubiertoException e) {
 				e.printStackTrace();
 			}
-		}throw new CuentaInexistenteException("Verifique los datos ingresados");
+		}
+		throw new CuentaInexistenteException("Verifique los datos ingresados");
 	}
 
 	@Override
 	public void recibirDinero(String CBUqueEnvia, String CBUqueRecibe, Double monto) throws CuentaInexistenteException {
-		if(CBUqueEnvia.equals(CBU) && cbuGenerados.contains(CBUqueRecibe)) {
+		if (CBUqueEnvia.equals(CBU) && cbuGenerados.contains(CBUqueRecibe)) {
 			agregarDinero(monto);
-			registrarOperacion(Motivo.TRANSFERENCIA , CBUqueEnvia, CBUqueRecibe, monto);
-		}throw new CuentaInexistenteException("Verifique los datos ingresados");
+			registrarOperacion(Motivo.TRANSFERENCIA, CBUqueEnvia, CBUqueRecibe, monto);
+		}
+		throw new CuentaInexistenteException("Verifique los datos ingresados");
 	}
 
-	
 }
