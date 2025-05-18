@@ -1,0 +1,34 @@
+# Build system
+.gradle/
+build/
+.cxx/
+.externalNativeBuild/
+
+# IDE
+.idea/
+*.iml
+/local.properties
+.DS_Store
+
+# IntelliJ
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# Android
+captures/
+output.json
+
+# Firebase/Keystores
+*.keystore
+*.jks
+
+# Misc
+*.log
+*.class
+
+# OS-specific
+Thumbs.db
