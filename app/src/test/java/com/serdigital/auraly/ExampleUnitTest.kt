@@ -1,4 +1,4 @@
-package com.example.auraly
+package com.serdigital.auraly
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

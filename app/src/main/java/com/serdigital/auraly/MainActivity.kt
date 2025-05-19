@@ -1,4 +1,4 @@
-package com.example.auraly
+package com.serdigital.auraly
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,19 +11,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.auraly.ui.theme.AuralyTheme
+import com.google.firebase.FirebaseApp
+import com.serdigital.auraly.ui.screens.ClientScreen
+import com.serdigital.auraly.ui.theme.AuralyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // ✅ Inicialización de Firebase
+        FirebaseApp.initializeApp(this)
+
         enableEdgeToEdge()
         setContent {
             AuralyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    ClientScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

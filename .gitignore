@@ -25,6 +25,7 @@ output.json
 # Firebase/Keystores
 *.keystore
 *.jks
+/app/google-services.json
 
 # Misc
 *.log
