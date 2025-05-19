@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kover)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -90,6 +91,10 @@ dependencies {
     implementation(libs.androidxHiltNavigationCompose)
     androidTestImplementation(libs.daggerHiltAndroidTesting)
     testImplementation(libs.daggerHiltAndroidTesting)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database)
 }
 
 tasks.withType<Detekt>().configureEach {

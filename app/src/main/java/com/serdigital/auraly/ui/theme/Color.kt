@@ -1,4 +1,4 @@
-package com.example.auraly.ui.theme
+package com.serdigital.auraly.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

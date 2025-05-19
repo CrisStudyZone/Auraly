@@ -1,4 +1,4 @@
-package com.example.auraly.ui.theme
+package com.serdigital.auraly.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
