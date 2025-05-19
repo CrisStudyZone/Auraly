@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.FirebaseApp
+import com.serdigital.auraly.ui.screens.ClientScreen
 import com.serdigital.auraly.ui.theme.AuralyTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,10 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AuralyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    ClientScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

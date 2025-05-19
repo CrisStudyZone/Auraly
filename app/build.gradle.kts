@@ -13,11 +13,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.auraly"
+    namespace = "com.serdigital.auraly"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.auraly"
+        applicationId = "com.serdigital.auraly"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
