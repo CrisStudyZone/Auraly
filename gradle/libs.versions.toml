@@ -36,6 +36,8 @@ daggerHiltAndroidTesting = { group = "com.google.dagger", name = "hilt-android-t
 androidxHiltNavigationCompose = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
 ktlintRuleset = { group = "com.pinterest", name = "ktlint", version.ref = "ktlint" }
 firebase-database = { module = "com.google.firebase:firebase-database", version = "21.0.0" }
+firebase-auth = { module = "com.google.firebase:firebase-auth", version = "23.2.0"}
+play-services-auth = { module = "com.google.android.gms:play-services-auth", version = "23.0.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
