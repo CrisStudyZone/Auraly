@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.FirebaseApp
-import com.serdigital.auraly.ui.screens.ClientScreen
+import com.serdigital.auraly.ui.screens.LoginScreen
 import com.serdigital.auraly.ui.theme.AuralyTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AuralyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ClientScreen(modifier = Modifier.padding(innerPadding))
+                    LoginScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
