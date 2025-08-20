@@ -14,12 +14,12 @@ plugins {
 
 android {
     namespace = "com.serdigital.auraly"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.serdigital.auraly"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -67,7 +67,7 @@ android {
         buildUponDefaultConfig = true
         allRules = true
         ignoreFailures = false
-        config = files("C:\\Users\\54116\\AndroidStudioProjects\\Auraly\\detekt.yml")
+        config.setFrom(files("C:\\Users\\54116\\AndroidStudioProjects\\Auraly\\detekt.yml"))
     }
 }
 
@@ -107,7 +107,7 @@ dependencies {
 }
 
 tasks.withType<Detekt>().configureEach {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
 }
 
 ksp {
